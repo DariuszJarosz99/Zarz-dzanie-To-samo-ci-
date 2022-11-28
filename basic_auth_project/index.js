@@ -3,7 +3,7 @@ const express = require("express");
 var path = require('path');
 
 const app = express();
-
+// Funkcja odpowiadajaca za logikę autoryzowania, jeżeli login i hasło się zgadzają z ustawionymi przechodzimy autoryzacje w innym przypadku wyskakuje błąd
 function authentication(req, res, next) {
 	var authheader = req.headers.authorization;
 	console.log(req.headers);
@@ -20,7 +20,7 @@ function authentication(req, res, next) {
 	var user = auth[0];
 	var pass = auth[1];
 
-	if (user == '' && pass == '') {
+	if (user == 'Darek' && pass == 'pass') {
 
 		// If Authorized user
 		next();
