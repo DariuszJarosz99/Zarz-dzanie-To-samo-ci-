@@ -1,0 +1,32 @@
+# Aby ułatwić i zmniejszyć ilość kodu importuje bibliotekę base64 zawierającą funkcje zarówno do dekodowania jak i kodowania tekstu
+import base64
+
+# Definiuje funkcję
+def b64encoder():
+# Encode text jest zmienną która będzie zawierać dowolny tekst który wpiszemy w konsoli
+    encode_text = input("Wprowadź tekst do zakodowania: ")
+
+# text to bytes jak sama nazwa mówi zamienia nam tekst w formę odwzorowującą bajty, jest to potrzebne ponieważ aby zaszyfrować tekst tą formą kodowania,
+# najpierw trzeba uzyskać odzwierciedlenie znaku w formie zero jedynkowej na podstawie tabeli ascii, dlatego w nawiasie znajduje się odniesienie do ascii
+    text_to_bytes = encode_text.encode('ascii')
+
+# Cały tekst(w tym wypadku text_to_bytes, ponieważ jest już w formie 0-1) jest następnie dzielony na grupy po 3 bajty(czyli 24 bity), a później rozkładany jest na 4 grupy 6 bitowe.
+    bytes_to_text = base64.b64encode(text_to_bytes)
+
+# Ostatnią rzeczą jest ponowne zamienienie owych 4 grup 6 bitowych w formę znaku.
+    encoded_text = bytes_to_text.decode('ascii')
+
+    print(encoded_text)
+
+
+# Działanie skryptu dekodującego działa na bardzo podobnej zasadzie, tylko że w drugą stronę. Czyli zamiast rozbijać 4 grup 6 bitowych, zbijamy je w 3 grupy 8 bitowe.
+def b64decoder():
+    decode_text = input("Wprowadź tekst do dekodowania: ")
+    text_to_bytes = decode_text.encode('ascii')
+    bytes_to_text = base64.b64decode(text_to_bytes)
+    decoded_text = bytes_to_text.decode('ascii')
+
+    print(decoded_text)
+
+b64encoder()
+b64decoder()
